@@ -7,6 +7,7 @@ import * as Joi from 'joi';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './config/database.config';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { databaseConfig } from './config/database.config';
       useFactory: databaseConfig,
       inject: [ConfigService],
     }),
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
