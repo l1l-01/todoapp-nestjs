@@ -1,9 +1,16 @@
-import { Controller, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { Task } from './entities/task.entity';
 import { TasksService } from './tasks.service';
-import { Get, Post, Body } from '@nestjs/common';
+import { Get, Post, Put, Delete, Body } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskExistsPipe } from './pipes/task.exists.pipe';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -24,5 +31,21 @@ export class TasksController {
   @Post()
   async create(@Body() createTaskData: CreateTaskDto): Promise<Task> {
     return this.taskService.create(createTaskData);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
+    @Body() updateTaskdata: UpdateTaskDto,
+  ): Promise<Task> {
+    return this.taskService.update(id, updateTaskdata);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(
+    @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
+  ): Promise<void> {
+    await this.taskService.remove(id);
   }
 }
