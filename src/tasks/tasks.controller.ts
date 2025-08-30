@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { Task } from './entities/task.entity';
 import { TasksService } from './tasks.service';
-import { Get, Post, Put, Delete, Body } from '@nestjs/common';
+import { Get, Post, Put, Delete, Body, Render } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskExistsPipe } from './pipes/task.exists.pipe';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -17,8 +17,10 @@ export class TasksController {
   constructor(private readonly taskService: TasksService) {}
 
   @Get()
-  async findAll(): Promise<Task[]> {
-    return this.taskService.findAll();
+  @Render('index')
+  async findAll(): Promise<{ tasks: Task[] }> {
+    const tasks: Task[] = await this.taskService.findAll();
+    return { tasks };
   }
 
   @Get(':id')
