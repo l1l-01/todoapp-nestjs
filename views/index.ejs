@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <header>
-        <title>Todo App</title>
+        <title>Todo List</title>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
         >
     </header>
-  <body class="container has-background-danger is-flex is-flex-direction-column" style="min-height: 100vh;">
-    <h1>Tasks</h1>
+  <body class="container is-flex is-flex-direction-column is-justify-content-center" style="min-height: 100vh;">
+      <h2 class="title is-2 is-spaced has-text-centered">Todo List</h2>
 
-    <ul>
+    <div>
       <% tasks.forEach((task,index) => { %>
           <div class="card">
             <header class="card-header">
@@ -28,25 +28,13 @@
                 <time datetime="2016-1-1"><%= task.createdAt || "N/A" %></time>
               </div>
             </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item">Save</a>
-              <a href="#" class="card-footer-item">Edit</a>
-              <a href="#" class="card-footer-item">Delete</a>
+            <footer class="card-footer ">
+                    <button class="card-footer-item button is-warning"><%= task.completed ? "Mark as Completed" : "Mark as Incompleted" %></button>
+              <button class="card-footer-item button is-info">Edit</button>
+              <button class="card-footer-item button is-danger">Delete</button>
             </footer>
           </div>
-       <div class=" is-2">
-           <li>
-
-               <%= task.completed ? 'Completed' : 'Not Completed' %>
-          </li>
-       </div>
       <% }) %>
-    </ul>
-
-    <h2>Create new Task</h2>
-    <form action="/tasks" method="POST">
-      <input type="text" name="title" placeholder="Task title" />
-      <button type="submit">Create</button>
-    </form>
+      </div>
   </body>
 </html>
