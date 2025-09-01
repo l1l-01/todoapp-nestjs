@@ -9,32 +9,72 @@
     </header>
   <body class="container is-flex is-flex-direction-column is-justify-content-center" style="min-height: 100vh;">
       <h2 class="title is-2 is-spaced has-text-centered">Todo List</h2>
-
+      <form>
+          <div class="control">
+              <textarea
+                class="textarea is-medium"
+                placeholder="Medium textarea"
+              ></textarea>
+      </form>
     <div>
+    <table class="table" style="width:100%">
       <% tasks.forEach((task,index) => { %>
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title"><%= `Task ${index + 1}` %></p>
-              <button class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                  <%= task.name || "N/A" %>
-                <br />
-                <time datetime="2016-1-1"><%= task.createdAt || "N/A" %></time>
-              </div>
-            </div>
-            <footer class="card-footer ">
-                    <button class="card-footer-item button is-warning"><%= task.completed ? "Mark as Completed" : "Mark as Incompleted" %></button>
-              <button class="card-footer-item button is-info">Edit</button>
-              <button class="card-footer-item button is-danger">Delete</button>
-            </footer>
-          </div>
+            <thead>
+              <tr>
+                <th><abbr title="Task Id">Id</abbr></th>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="<%= task.Completed ? 'is-selected' : 'is-warning' %>"><%= task.id %></th>
+                <td>
+                    <%= task.name %>
+                </td>
+                <td>
+                    <%= task.Completed ? 'Completed' : 'Incompleted' %>
+                </td>
+                <td>
+                    <% const createdAt = task.createdAt %>
+                    <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
+                </td>
+                <td>
+                    <button class="button is-danger is-outlined">
+                        Delete
+                      </button>
+                      <button class="button is-success is-outlined">
+                          Mark as Completed
+                        </button>
+                        <button class="button is-warning is-outlined">
+                            Mark as incompleted
+                          </button>
+                </td>
+              </tr>
+            </tbody>
       <% }) %>
+      <tfoot>
+        <tr>
+          <th><abbr title="Position">__</abbr></th>
+          <th>1</th>
+          <th>__</th>
+          <th>__</th>
+          <th>
+              <button class="button is-danger is-outlined">
+                  Delete All
+                </button>
+                <button class="button is-success is-outlined">
+                    Mark all as Completed
+                  </button>
+                  <button class="button is-warning is-outlined">
+                      Mark all as incompleted
+                    </button>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
       </div>
   </body>
 </html>
