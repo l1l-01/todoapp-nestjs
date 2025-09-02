@@ -41,16 +41,22 @@
                     <% const createdAt = task.createdAt %>
                     <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
                 </td>
-                <td>
-                    <button class="button is-danger is-outlined is-small">
-                        Delete
-                      </button>
-                      <button class="button is-success is-outlined is-small">
+                <td class="is-flex">
+                    <form style="margin-right: 10px;">
+                        <button class="button is-danger is-outlined is-small">
+                            Delete
+                        </button>
+                    </form>
+                    <form style="margin-right: 10px;">
+                        <button class="button is-success is-outlined is-small">
                           Mark as Completed
                         </button>
+                    </form>
+                    <form>
                         <button class="button is-warning is-outlined is-small">
                             Mark as incompleted
-                          </button>
+                        </button>
+                    </form>
                 </td>
               </tr>
             </tbody>
@@ -61,16 +67,22 @@
           <th><%= totalTasks %></th>
           <th><span class="has-text-success"><%= completedTasksTotal %></span> - <span class="has-text-warning"><%= incompleteTasksTotal %></span></th>
           <th>__</th>
-          <th>
-              <button class="button is-danger is-outlined is-small">
-                  Delete All
-                </button>
+          <th class="is-flex">
+              <form style="margin-right: 10px;">
+                  <button class="button is-danger is-outlined is-small">
+                      Delete All
+                  </button>
+              </form>
+              <form style="margin-right: 10px;">
                 <button class="button is-success is-outlined is-small">
                     Mark all as Completed
-                  </button>
+                </button>
+              </form>
+              <form>
                   <button class="button is-warning is-outlined is-small">
                       Mark all as incompleted
-                    </button>
+                  </button>
+              </form>
           </th>
         </tr>
       </tfoot>
