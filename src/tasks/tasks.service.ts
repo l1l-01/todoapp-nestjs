@@ -16,6 +16,18 @@ export class TasksService {
     return this.taskRepository.find();
   }
 
+  async getTasksTotal(): Promise<number> {
+    return this.taskRepository.count();
+  }
+
+  async getCompletedTasksTotal(): Promise<number> {
+    return this.taskRepository.count({ where: { completed: true } });
+  }
+
+  async getIncompletedTasksTotal(): Promise<number> {
+    return this.taskRepository.count({ where: { completed: false } });
+  }
+
   async findOne(id: number): Promise<Task> {
     const task = await this.taskRepository.findOneBy({ id });
     if (!task) {

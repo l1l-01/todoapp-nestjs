@@ -18,9 +18,19 @@ export class TasksController {
 
   @Get()
   @Render('index')
-  async findAll(): Promise<{ tasks: Task[] }> {
+  async findAll(): Promise<{
+    tasks: Task[];
+    totalTasks: number;
+    completedTasksTotal: number;
+    incompleteTasksTotal: number;
+  }> {
     const tasks: Task[] = await this.taskService.findAll();
-    return { tasks };
+    const totalTasks: number = await this.taskService.getTasksTotal();
+    const completedTasksTotal: number =
+      await this.taskService.getCompletedTasksTotal();
+    const incompleteTasksTotal: number =
+      await this.taskService.getIncompletedTasksTotal();
+    return { tasks, totalTasks, completedTasksTotal, incompleteTasksTotal };
   }
 
   @Get(':id')

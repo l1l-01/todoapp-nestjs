@@ -42,13 +42,13 @@
                     <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
                 </td>
                 <td>
-                    <button class="button is-danger is-outlined">
+                    <button class="button is-danger is-outlined is-small">
                         Delete
                       </button>
-                      <button class="button is-success is-outlined">
+                      <button class="button is-success is-outlined is-small">
                           Mark as Completed
                         </button>
-                        <button class="button is-warning is-outlined">
+                        <button class="button is-warning is-outlined is-small">
                             Mark as incompleted
                           </button>
                 </td>
@@ -57,18 +57,18 @@
       <% }) %>
       <tfoot>
         <tr>
-          <th><abbr title="Position">__</abbr></th>
-          <th>1</th>
-          <th>__</th>
+          <th>Total</th>
+          <th><%= totalTasks %></th>
+          <th><span class="has-text-success"><%= completedTasksTotal %></span> - <span class="has-text-warning"><%= incompleteTasksTotal %></span></th>
           <th>__</th>
           <th>
-              <button class="button is-danger is-outlined">
+              <button class="button is-danger is-outlined is-small">
                   Delete All
                 </button>
-                <button class="button is-success is-outlined">
+                <button class="button is-success is-outlined is-small">
                     Mark all as Completed
                   </button>
-                  <button class="button is-warning is-outlined">
+                  <button class="button is-warning is-outlined is-small">
                       Mark all as incompleted
                     </button>
           </th>
