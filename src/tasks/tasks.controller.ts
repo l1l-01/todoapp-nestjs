@@ -66,8 +66,8 @@ export class TasksController {
 
   @Patch(':id')
   async markAsCompleted(
-    @Param('id', ParseIntPipe, TaskExistsPipe) @Res() res: Response,
-    id: number,
+    @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
+    @Res() res: Response,
   ) {
     await this.taskService.markAsCompleted(id);
     res.redirect('/tasks');
