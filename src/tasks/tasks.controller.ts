@@ -68,8 +68,10 @@ export class TasksController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(
-    @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
+    @Param('id', ParseIntPipe, TaskExistsPipe) @Res() res: Response,
+    id: number,
   ): Promise<void> {
-    await this.taskService.remove(id);
+    const task = await this.taskService.remove(id);
+    return res.redirect('/tasks');
   }
 }

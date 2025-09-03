@@ -46,7 +46,7 @@
                     <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
                 </td>
                 <td class="is-flex">
-                    <form style="margin-right: 10px;" method="POST" action="/tasks/<%= tasks.id %>?_method=DELETE">
+                    <form style="margin-right: 10px;" method="POST" action="/tasks/<%= task.id %>?_method=DELETE">
                         <button class="button is-danger is-outlined is-small">
                             Delete
                         </button>
@@ -75,16 +75,6 @@
               <form style="margin-right: 10px;">
                   <button class="button is-danger is-outlined is-small">
                       Delete All
-                  </button>
-              </form>
-              <form style="margin-right: 10px;">
-                <button class="button is-success is-outlined is-small">
-                    Mark all as Completed
-                </button>
-              </form>
-              <form>
-                  <button class="button is-warning is-outlined is-small">
-                      Mark all as incompleted
                   </button>
               </form>
           </th>
