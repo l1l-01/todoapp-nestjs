@@ -13,7 +13,7 @@ export class TasksService {
   ) {}
 
   async findAll(): Promise<Task[]> {
-    return this.taskRepository.find();
+    return this.taskRepository.find({ order: { id: 'ASC' } });
   }
 
   async getTasksTotal(): Promise<number> {
@@ -42,6 +42,11 @@ export class TasksService {
       completed: createTaskDto.completed,
     });
     return this.taskRepository.save(newTask);
+  }
+
+  async markAsCompleted(id: number): Promise<Task> {
+    const taskToUpdate: Task = await this.findOne(id);
+    return this.taskRepository.save({ ...taskToUpdate, completed: true });
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto): Promise<Task> {

@@ -9,45 +9,49 @@
     </header>
   <body class="container is-flex is-flex-direction-column is-justify-content-center" style="min-height: 100vh;">
       <h2 class="title is-2 is-spaced has-text-centered">Todo List</h2>
-      <form>
-          <div class="control">
-              <textarea
-                class="textarea is-medium"
-                placeholder="Medium textarea"
-              ></textarea>
+      <form class="box" style="margin-bottom: 50px;" method="POST" action="/tasks">
+          <div class="control is-flex">
+              <input
+                class="input"
+                type="text"
+                placeholder="Success input"
+                name="name"
+              />
+              <button type="submit" class="button is-success">ADD</button>
+          </div>
       </form>
-    <div>
-    <table class="table" style="width:100%">
+    <div class="box">
+        <table class="table" style="width:100%">
+        <thead>
+          <tr>
+            <th><abbr title="Task Id">Id</abbr></th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
       <% tasks.forEach((task,index) => { %>
-            <thead>
-              <tr>
-                <th><abbr title="Task Id">Id</abbr></th>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Created At</th>
-                <th>Action</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
-                <th class="<%= task.Completed ? 'is-selected' : 'is-warning' %>"><%= task.id %></th>
+                <th><%= task.id %></th>
                 <td>
                     <%= task.name %>
                 </td>
-                <td>
-                    <%= task.Completed ? 'Completed' : 'Incompleted' %>
+                <td class="<%= task.completed ? 'has-text-success' : 'has-text-warning' %>">
+                    <%= task.completed ? 'Completed' : 'Incompleted' %>
                 </td>
                 <td>
                     <% const createdAt = task.createdAt %>
                     <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
                 </td>
                 <td class="is-flex">
-                    <form style="margin-right: 10px;">
+                    <form style="margin-right: 10px;" method="POST" action="/tasks/<%= tasks.id %>?_method=DELETE">
                         <button class="button is-danger is-outlined is-small">
                             Delete
                         </button>
                     </form>
-                    <form style="margin-right: 10px;">
+                    <form style="margin-right: 10px;" method="POST" action="/tasks/<%= task.id %>?_method=PATCH">
                         <button class="button is-success is-outlined is-small">
                           Mark as Completed
                         </button>
@@ -86,7 +90,7 @@
           </th>
         </tr>
       </tfoot>
-    </table>
-      </div>
+        </table>
+    </div>
   </body>
 </html>

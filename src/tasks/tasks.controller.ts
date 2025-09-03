@@ -4,13 +4,15 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Patch,
 } from '@nestjs/common';
 import { Task } from './entities/task.entity';
 import { TasksService } from './tasks.service';
-import { Get, Post, Put, Delete, Body, Render } from '@nestjs/common';
+import { Get, Post, Put, Delete, Body, Render, Res } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskExistsPipe } from './pipes/task.exists.pipe';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { Response } from 'express';
 
 @Controller('tasks')
 export class TasksController {
@@ -41,8 +43,9 @@ export class TasksController {
   }
 
   @Post()
-  async create(@Body() createTaskData: CreateTaskDto): Promise<Task> {
-    return this.taskService.create(createTaskData);
+  async create(@Body() createTaskData: CreateTaskDto, @Res() res: Response) {
+    const task: Task = await this.taskService.create(createTaskData);
+    return res.redirect('/tasks');
   }
 
   @Put(':id')
@@ -51,6 +54,15 @@ export class TasksController {
     @Body() updateTaskdata: UpdateTaskDto,
   ): Promise<Task> {
     return this.taskService.update(id, updateTaskdata);
+  }
+
+  @Patch(':id')
+  async markAsCompleted(
+    @Param('id', ParseIntPipe, TaskExistsPipe) @Res() res: Response,
+    id: number,
+  ) {
+    const task = await this.taskService.markAsCompleted(id);
+    return res.redirect('/tasks');
   }
 
   @Delete(':id')
