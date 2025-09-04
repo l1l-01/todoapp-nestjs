@@ -49,7 +49,7 @@ export class TasksService {
     return this.taskRepository.save({ ...taskToUpdate, completed: true });
   }
 
-  async markAsIncompleted(id: number): Promise<Task> {
+  async markAsIncomplete(id: number): Promise<Task> {
     const taskToUpdate: Task = await this.findOne(id);
     return this.taskRepository.save({ ...taskToUpdate, completed: false });
   }

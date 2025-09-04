@@ -73,6 +73,15 @@ export class TasksController {
     res.redirect('/tasks');
   }
 
+  @Patch('/unmark/:id')
+  async markAsIncomplete(
+    @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
+    @Res() res: Response,
+  ) {
+    await this.taskService.markAsIncomplete(id);
+    res.redirect('/tasks');
+  }
+
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(

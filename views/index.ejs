@@ -56,7 +56,7 @@
                           Mark as Completed
                         </button>
                     </form>
-                    <form>
+                    <form method="POST" action="/tasks/unmark/<%= task.id %>?_method=PATCH">
                         <button class="button is-warning is-outlined is-small">
                             Mark as incompleted
                         </button>
