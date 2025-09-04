@@ -63,4 +63,8 @@ export class TasksService {
     const taskToDelete = await this.findOne(id);
     await this.taskRepository.remove(taskToDelete);
   }
+
+  async removeAll(): Promise<void> {
+    await this.taskRepository.clear();
+  }
 }

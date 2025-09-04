@@ -75,7 +75,7 @@
           <th><span class="has-text-success"><%= completedTasksTotal %></span> - <span class="has-text-warning"><%= incompleteTasksTotal %></span></th>
           <th>__</th>
           <th class="is-flex">
-              <form style="margin-right: 10px;">
+              <form style="margin-right: 10px;" method="POST" action="/tasks/remove/all?_method=DELETE">
                   <button class="button is-danger is-outlined is-small">
                       Delete All
                   </button>

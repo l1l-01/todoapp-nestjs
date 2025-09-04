@@ -95,4 +95,11 @@ export class TasksController {
     await this.taskService.remove(id);
     return res.redirect('/tasks');
   }
+
+  @Delete('/remove/all')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async removeAll(@Res() res: Response) {
+    await this.taskService.removeAll();
+    return res.redirect('/tasks');
+  }
 }
