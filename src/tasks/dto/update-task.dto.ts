@@ -1,10 +1,4 @@
-import {
-  IsOptional,
-  IsString,
-  MinLength,
-  MaxLength,
-  IsBoolean,
-} from 'class-validator';
+import { IsOptional, IsString, MinLength, MaxLength } from 'class-validator';
 
 export class UpdateTaskDto {
   @IsOptional()
@@ -14,8 +8,4 @@ export class UpdateTaskDto {
     message: 'Task title cannot be longer than 100 characters',
   })
   name: string;
-
-  @IsOptional()
-  @IsBoolean({ message: 'Task completed must be a boolean' })
-  completed: boolean;
 }

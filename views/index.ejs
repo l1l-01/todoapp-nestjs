@@ -46,6 +46,9 @@
                     <%= createdAt.toString().replace("GMT+0100 (GMT+01:00)", "") %>
                 </td>
                 <td class="is-flex">
+                    <a href="/tasks/edit/<%= task.id %>" class="button is-info is-outlined is-small" style="margin-right: 10px;">
+                        Update
+                    </a>
                     <form style="margin-right: 10px;" method="POST" action="/tasks/<%= task.id %>?_method=DELETE">
                         <button class="button is-danger is-outlined is-small">
                             Delete

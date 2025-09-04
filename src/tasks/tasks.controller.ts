@@ -43,11 +43,13 @@ export class TasksController {
     return { tasks, totalTasks, completedTasksTotal, incompleteTasksTotal };
   }
 
-  @Get(':id')
+  @Get('/edit/:id')
+  @Render('update')
   async findOne(
     @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
-  ): Promise<Task> {
-    return this.taskService.findOne(id);
+  ): Promise<{ task: Task }> {
+    const task: Task = await this.taskService.findOne(id);
+    return { task };
   }
 
   @Post()
@@ -60,8 +62,10 @@ export class TasksController {
   async update(
     @Param('id', ParseIntPipe, TaskExistsPipe) id: number,
     @Body() updateTaskdata: UpdateTaskDto,
-  ): Promise<Task> {
-    return this.taskService.update(id, updateTaskdata);
+    @Res() res: Response,
+  ) {
+    await this.taskService.update(id, updateTaskdata);
+    res.redirect('/tasks');
   }
 
   @Patch(':id')

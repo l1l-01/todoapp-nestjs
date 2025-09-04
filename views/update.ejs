@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Todo List</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        >
+    </header>
+  <body class="container is-flex is-flex-direction-column is-justify-content-center" style="min-height: 100vh;">
+      <h2 class="title is-2 is-spaced has-text-centered">Update Task</h2>
+        <form class="box" style="margin-bottom: 50px;" method="POST" action="/tasks/<%= task.id %>?_method=PUT">
+            <div class="control is-flex">
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="Success input"
+                  name="name"
+                  value="<%= task.name %>"
+                />
+                <button type="submit" class="button is-info">UPDATE</button>
+            </div>
+        </form>
+  </body>
+</html>
