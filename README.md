@@ -44,7 +44,7 @@ A small, minimal Todo application built with [NestJS](https://nestjs.com/), [EJS
    ```
 
 ## Usage
-- Navigate to `http://localhost:3000` in your browser.
+- Navigate to `http://localhost:3000/tasks` in your browser.
 - Use the UI to create, view, update, or delete todo items.
 
 ## Project Structure
